@@ -6,17 +6,15 @@ class Produk {
             $penerbit,
             $harga,
             $jmlHalaman,
-            $waktuMain,
-            $tipe;
+            $waktuMain;
 
-    public function __construct( $judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $jmlHalaman = 0, $waktuMain = 0, $tipe){
+    public function __construct( $judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $jmlHalaman = 0, $waktuMain = 0){
         $this->judul = $judul;
         $this->penulis = $penulis;
         $this->penerbit = $penerbit;
         $this->harga = $harga;
         $this->jmlHalaman = $jmlHalaman;
         $this->waktuMain = $waktuMain;
-        $this->tipe = $tipe;
     }
 
     public function getLabel(){
@@ -24,10 +22,10 @@ class Produk {
     
     }
 
-    public function getInfoLengkap(){
+    public function getInfoProduk(){
 
-    $str = "{$this->tipe} : {this->judul} | {$this->getLabel()} (Rp. {$this->harga})";
-
+    $str = "{this->judul} | {$this->getLabel()} (Rp. {$this->harga})";
+   
      return $str;
     }
 
@@ -35,7 +33,14 @@ class Produk {
 
 class Komik extends Produk {
     public function getInfoProduk(){
-        $str = "Komik : {this->judul} | {$this->getLabel()} (Rp. {$this->harga}) - {$this->jmlHalaman} Halaman.";
+        $str = "Komik : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) - {$this->jmlHalaman} Halaman.";
+        return $str;
+    }
+}
+
+class Game extends Produk {
+    public function getInfoProduk(){
+        $str = "Game : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) ~ {$this->waktuMain} jam.";
         return $str;
     }
 }
@@ -48,9 +53,9 @@ class CetakInfoProduk{
     }
 }
 
-$produk1 = new Komik("keluh selatan", "sulthan jihad abiyyu", "wattpad", 30000, 100, 0, "Komik" );
+$produk1 = new Komik("keluh selatan", "sulthan jihad abiyyu", "wattpad", 30000, 100, 0 );
 echo "<br>";
-$produk2 = new Produk("uncharted", "neil druckmann", "sony computer", 250000, 0, 50, "Game");
+$produk2 = new Game("uncharted", "neil druckmann", "sony computer", 250000, 0, 50 );
 
 echo $produk1->getInfoProduk();
 echo "<br>";
